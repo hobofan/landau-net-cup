@@ -1,0 +1,22 @@
+{
+  "name": "landau-net-cup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-model": "babel-node src/build.js",
+    "build-model-broken": "babel-node src/broken-build.js",
+    "packager": "landau-packager"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/node": "^7.10.5",
+    "@landaujs/landau": "^0.2.0-alpha.4",
+    "@landaujs/landau-packager": "^0.2.0-alpha.1",
+    "babel-preset-react-app": "^9.1.2",
+    "prettier": "^2.2.1",
+    "react": "^16.13.1"
+  }
+}
