@@ -63,7 +63,7 @@ const Bottom = () => {
 };
 
 const Net = () => {
-  const netHeight = 60;
+  const netHeight = 68;
   const bottomDiameter = 50;
   const topDiameter = 66;
   const wallThickness = 2;
@@ -133,9 +133,73 @@ const Net = () => {
   );
 };
 
+const Top = () => {
+  const netHeight = 68;
+  const bottomDiameter = 50;
+  const topDiameter = 66;
+  const wallThickness = 2;
+
+  const topThickness = 2;
+  const topOverhang = 5;
+
+  const cylinderSegments = 64;
+
+  return (
+    <align>
+      <subtract>
+        <union>
+          <cylinderElliptic
+            height={netHeight}
+            startRadius={[bottomDiameter / 2, bottomDiameter / 2]}
+            endRadius={[topDiameter / 2, topDiameter / 2]}
+            segments={cylinderSegments}
+          />
+          <translateZ offset={netHeight / 2}>
+            <cylinder
+              height={topThickness}
+              radius={topDiameter / 2 + topOverhang}
+              segments={cylinderSegments}
+            />
+          </translateZ>
+          <translateZ offset={(netHeight - topThickness) / 2}>
+            <cylinder
+              height={topThickness}
+              radius={topDiameter / 2 + topOverhang}
+              segments={cylinderSegments}
+            />
+          </translateZ>
+        </union>
+        <subtract>
+          <translateZ offset={netHeight / 2 - 4.5}>
+            <torus
+              innerRadius={5}
+              outerRadius={topDiameter / 2 + 4}
+              innerSegments={cylinderSegments}
+              outerSegments={cylinderSegments}
+            />
+          </translateZ>
+        </subtract>
+        <cylinderElliptic
+          height={netHeight * 2}
+          startRadius={[
+            bottomDiameter / 2 - wallThickness,
+            bottomDiameter / 2 - wallThickness,
+          ]}
+          endRadius={[
+            topDiameter / 2 - wallThickness,
+            topDiameter / 2 - wallThickness,
+          ]}
+          segments={cylinderSegments}
+        />
+      </subtract>
+    </align>
+  );
+};
+
 const NetCup = () => {
-  // return <Bottom />;
+  // return <Top />;
   // return <Net />;
+  // return <Bottom />;
 
   // return (
   // <union>
@@ -144,9 +208,39 @@ const NetCup = () => {
   // </union>
   // );
 
+  const netHeight = 68;
+  const topDiameter = 66;
+
+  const netTopMergeOffset = 8.5;
+
+  const cylinderSegments = 64;
+
   return (
     <union>
-      <Net />
+      <subtract>
+        <Top />
+        <translateZ offset={-netTopMergeOffset}>
+          <align>
+            <cylinder
+              height={netHeight}
+              radius={topDiameter / 2}
+              segments={cylinderSegments}
+            />
+          </align>
+        </translateZ>
+      </subtract>
+      <subtract>
+        <Net />
+        <translateZ offset={netHeight - netTopMergeOffset}>
+          <align>
+            <cylinder
+              height={netHeight}
+              radius={topDiameter / 2}
+              segments={cylinderSegments}
+            />
+          </align>
+        </translateZ>
+      </subtract>
       <align>
         <Bottom />
       </align>
