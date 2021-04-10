@@ -211,7 +211,7 @@ const NetCup = () => {
   const netHeight = 68;
   const topDiameter = 66;
 
-  const netTopMergeOffset = 8.5;
+  const netTopMergeOffset = 11;
 
   const cylinderSegments = 64;
 
